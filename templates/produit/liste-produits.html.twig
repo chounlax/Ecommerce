@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{parent()}}Liste des Produits{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+	<h1 class="text-center text-primary mt-4 pt-4 display-1 fw-bold"> LISTE DES PRODUITS</h1>
+    <div class="row justify-content-center">
+			<div class="col-12 col-md-8 bg-white p-4 m-0 text-primary">
+				<div class="table-responsive">
+				{{ form_start(form) }}
+					<table class="table table-hover">
+						<thead>
+							<tr class="fw-bold text-primary">
+								<th scope="col">Nom</th>
+								<th scope="col">Catégorie</th>
+								<th scope="col">Prix</th>
+                                <th scope="col">Stock</th>
+                                <th scope="col"></th>
+								<th scope="col"></th>
+								<th scope="col"></th>
+                               
+							</tr>
+						</thead>
+						<tbody>
+							{% for produit in produits %}
+								<tr class="{{ cycle(['table-primary','table-secondary'], loop.index0) }}">
+										<td>{{ produit.nom | capitalize }}</td>
+							<td>{{ produit.categorie | capitalize }}</td>
+							<td>{{ produit.prix }} €</td>
+                            <td>{{ produit.stock }} restant(s)</td>
+                            <td><a href="{{path("app_modifier_produit",{'id':produit.id})}}"><i class="bi bi-pen-fill text-dark"></i> lala</a></td>
+							<td><a href="{{path("app_supprimer_produit",{'id':produit.id})}}"><i class="bi bi-trash-fill text-dark"></i>lala</a></td>
+							<td>{{ form_widget(form.produits[produit.id]) }}</td>
+															</tr>
+														{% endfor %}
+														</tbody>
+													</table>
+													{{ form_widget(form.supprimer) }}
+					{{ form_end(form) }}
+
+												</div>
+											</div>
+										</div>
+									</div>
+
+{% endblock %}
