@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des Utilisateurs{% endblock %}
+
+{% block body %}
+<main class="max-w-screen-xl mx-auto px-6 py-12">
+    <div class="mb-8">
+        <h1 class="text-3xl font-black text-slate-900 uppercase tracking-tighter">Gestion des Utilisateurs</h1>
+        <p class="text-slate-500">Modifier les privilèges des membres de la plateforme.</p>
+    </div>
+
+    <div class="bg-white rounded-[2rem] shadow-sm border border-slate-100 overflow-hidden">
+        <table class="w-full text-left border-collapse">
+            <thead>
+                <tr class="bg-slate-50 border-b border-slate-100">
+                    <th class="p-6 text-[10px] font-black uppercase tracking-widest text-slate-400">Utilisateur</th>
+                    <th class="p-6 text-[10px] font-black uppercase tracking-widest text-slate-400">Rôle Actuel</th>
+                    <th class="p-6 text-[10px] font-black uppercase tracking-widest text-slate-400">Modifier le rôle</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+                {% for user in users %}
+                    <tr class="hover:bg-slate-50/50 transition-colors">
+                        <td class="p-6">
+                            <div class="font-bold text-slate-900">{{ user.nom|upper }} {{ user.prenom }}</div>
+                            <div class="text-sm text-slate-500">{{ user.email }}</div>
+                        </td>
+                        <td class="p-6">
+                            {% if 'ROLE_ADMIN' in user.roles %}
+                                <span class="px-3 py-1 bg-red-100 text-red-600 rounded-full text-xs font-bold">ADMIN</span>
+                            {% elseif 'ROLE_MOD' in user.roles %}
+                                <span class="px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-bold">MODÉRATEUR</span>
+                            {% else %}
+                                <span class="px-3 py-1 bg-slate-100 text-slate-500 rounded-full text-xs font-bold">USER</span>
+                            {% endif %}
+                        </td>
+                        <td class="p-6">
+                            <form action="{{ path('app_admin_update_role', {'id': user.id}) }}" method="POST" class="flex gap-2">
+                                <select name="role" class="bg-slate-100 border-none rounded-lg text-sm font-medium py-2 px-3 focus:ring-2 focus:ring-primary/20 outline-none">
+                                    <option value="ROLE_USER" {% if 'ROLE_USER' in user.roles and user.roles|length == 1 %}selected{% endif %}>Utilisateur</option>
+                                    <option value="ROLE_MOD" {% if 'ROLE_MOD' in user.roles %}selected{% endif %}>Modérateur</option>
+                                    <option value="ROLE_ADMIN" {% if 'ROLE_ADMIN' in user.roles %}selected{% endif %}>Administrateur</option>
+                                </select>
+                                <button type="submit" class="bg-slate-900 text-white p-2 rounded-lg hover:bg-primary transition-colors flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-sm">save</span>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</main>
+{% endblock %}

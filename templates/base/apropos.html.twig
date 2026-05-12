@@ -1,9 +1,100 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ parent() }}À propos{% endblock %}
+{% block title %}{{ parent() }} - À Propos{% endblock %}
 
 {% block body %}
-  <h1 class="text-center text-primary mt-4 pt-4 display-1 fw-bold">
-    À PROPOS
-  </h1>
+<main class="bg-white">
+    {# Section Héros - Identité #}
+    <section class="relative py-24 px-6 overflow-hidden bg-slate-900">
+        <div class="absolute top-0 left-0 w-full h-full opacity-10">
+            <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+        </div>
+        
+        <div class="max-w-screen-xl mx-auto relative z-10 text-center">
+            <h1 class="font-headline text-5xl md:text-7xl font-black text-white tracking-tighter uppercase mb-6">
+                Plus qu'une boutique, <br><span class="text-primary">une passion.</span>
+            </h1>
+            <p class="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto font-medium">
+                TriathSport est né de la volonté d'accompagner chaque athlète dans sa quête d'excellence, du premier kilomètre jusqu'à la ligne d'arrivée.
+            </p>
+        </div>
+    </section>
+
+    {# Section Notre Histoire & Valeurs #}
+    <section class="py-20 px-6 max-w-screen-xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <div>
+                <h2 class="text-3xl font-black text-slate-900 uppercase tracking-tight mb-6 italic">L'aventure TriathSport</h2>
+                <div class="space-y-4 text-slate-600 leading-relaxed">
+                    <p>
+                        Ma plateforme a pour mission de simplifier l'accès à l'équipement de haute performance. Que vous soyez adepte de natation, de cyclisme ou de course à pied, nous avons sélectionné le meilleur pour votre triple effort.
+                    </p>
+                    <p>
+                        Nous croyons au dépassement de soi et à la technologie au service du sport. C'est pourquoi chaque produit de notre catalogue est testé et validé par des passionnés.
+                    </p>
+                </div>
+                
+                <div class="mt-10 grid grid-cols-2 gap-6">
+                    <div class="p-6 bg-slate-50 rounded-[2rem] border border-slate-100">
+                        <span class="material-symbols-outlined text-primary mb-3 text-3xl">bolt</span>
+                        <h4 class="font-bold text-slate-900">Performance</h4>
+                        <p class="text-xs text-slate-500 mt-1">Le matériel de pointe pour battre vos records.</p>
+                    </div>
+                    <div class="p-6 bg-slate-50 rounded-[2rem] border border-slate-100">
+                        <span class="material-symbols-outlined text-primary mb-3 text-3xl">verified_user</span>
+                        <h4 class="font-bold text-slate-900">Qualité</h4>
+                        <p class="text-xs text-slate-500 mt-1">Une sélection rigoureuse des meilleures marques.</p>
+                    </div>
+                </div>
+            </div>
+
+            {# Image décorative ou illustration #}
+            <div class="relative">
+                <div class="aspect-square bg-slate-200 rounded-[3rem] overflow-hidden shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500">
+                    <img src="uploads/images/background.png" alt="Triathlon effort" class="w-full h-full object-cover">
+                </div>
+                <div class="absolute -bottom-6 -left-6 bg-primary text-white p-8 rounded-3xl shadow-xl hidden md:block">
+                    <p class="text-4xl font-black italic">100%</p>
+                    <p class="text-xs uppercase font-bold tracking-widest">Dévoué au sport</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {# Section Statistiques (Chiffres clés) #}
+    <section class="bg-slate-50 py-20 px-6">
+        <div class="max-w-screen-xl mx-auto">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div>
+                    <p class="text-4xl md:text-5xl font-black text-slate-900 mb-2">500+</p>
+                    <p class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Références</p>
+                </div>
+                <div>
+                    <p class="text-4xl md:text-5xl font-black text-slate-900 mb-2">15k</p>
+                    <p class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Athlètes livrés</p>
+                </div>
+                <div>
+                    <p class="text-4xl md:text-5xl font-black text-slate-900 mb-2">24h</p>
+                    <p class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Expédition</p>
+                </div>
+                <div>
+                    <p class="text-4xl md:text-5xl font-black text-slate-900 mb-2">4.9/5</p>
+                    <p class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Avis clients</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {# Call to Action #}
+    <section class="py-24 px-6 text-center">
+        <div class="max-w-2xl mx-auto">
+            <h3 class="text-3xl font-black text-slate-900 uppercase mb-6">Prêt à relever le défi ?</h3>
+            <p class="text-slate-500 mb-10 font-medium">Découvrez notre nouvelle collection d'équipements pour votre prochain triathlon.</p>
+            <a href="{{ path('app_mes_produits') }}" class="inline-flex items-center gap-4 bg-primary text-white px-10 py-5 rounded-2xl font-black uppercase tracking-widest text-sm shadow-xl shadow-primary/20 hover:scale-105 transition-all">
+                Voir la boutique
+                <span class="material-symbols-outlined">arrow_forward</span>
+            </a>
+        </div>
+    </section>
+</main>
 {% endblock %}

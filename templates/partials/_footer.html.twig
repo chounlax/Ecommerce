@@ -1,0 +1,88 @@
+<footer class="bg-slate-100 dark:bg-slate-950 mt-auto">
+    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 px-8 py-16 w-full max-w-screen-2xl mx-auto">
+
+        {# Branding #}
+        <div class="col-span-2">
+            <a href="{{ path('app_home') }}" class="text-xl font-black text-slate-900 dark:text-white mb-4 font-headline uppercase tracking-tighter italic block">
+                TriathShare
+            </a>
+            <p class="text-slate-600 dark:text-slate-400 text-sm max-w-xs mb-6 font-body">
+                Empowering the endurance community with world-class gear and technical expertise since 2018.
+            </p>
+            <div class="flex gap-4">
+                <a href="#" class="w-8 h-8 flex items-center justify-center rounded-full bg-on-surface text-white hover:bg-primary transition-all">
+                    <span class="material-symbols-outlined text-sm">share</span>
+                </a>
+            </div>
+        </div>
+
+        {# Shop links #}
+        <div>
+            <h4 class="text-lg font-bold mb-4 font-headline text-orange-700 dark:text-orange-500">Shop</h4>
+            <ul class="space-y-2">
+                <li><a href="{{ path('app_category', { slug: 'swim' }) }}" class="text-slate-600 dark:text-slate-400 hover:text-orange-500 transition-colors text-sm font-body">Swim Gear</a></li>
+                <li><a href="{{ path('app_category', { slug: 'bike' }) }}" class="text-slate-600 dark:text-slate-400 hover:text-orange-500 transition-colors text-sm font-body">Bikes &amp; Frames</a></li>
+                <li><a href="{{ path('app_category', { slug: 'run' }) }}" class="text-slate-600 dark:text-slate-400 hover:text-orange-500 transition-colors text-sm font-body">Running Shoes</a></li>
+                <li><a href="{{ path('app_category', { slug: 'accessories' }) }}" class="text-slate-600 dark:text-slate-400 hover:text-orange-500 transition-colors text-sm font-body">Tech &amp; Wearables</a></li>
+            </ul>
+        </div>
+
+        {# Service links #}
+        <div>
+            <h4 class="text-lg font-bold mb-4 font-headline text-orange-700 dark:text-orange-500">Service</h4>
+            <ul class="space-y-2">
+                <li><a href="{{ path('app_support') }}" class="text-slate-600 dark:text-slate-400 hover:text-orange-500 transition-colors text-sm font-body">Technical Support</a></li>
+                <li><a href="{{ path('app_size_guide') }}" class="text-slate-600 dark:text-slate-400 hover:text-orange-500 transition-colors text-sm font-body">Size Guides</a></li>
+                <li><a href="{{ path('app_shipping') }}" class="text-slate-600 dark:text-slate-400 hover:text-orange-500 transition-colors text-sm font-body">Shipping &amp; Returns</a></li>
+            </ul>
+        </div>
+
+        {# Company links #}
+        <div>
+            <h4 class="text-lg font-bold mb-4 font-headline text-orange-700 dark:text-orange-500">Company</h4>
+            <ul class="space-y-2">
+                <li><a href="{{ path('app_about') }}" class="text-slate-600 dark:text-slate-400 hover:text-orange-500 transition-colors text-sm font-body">About Us</a></li>
+                <li><a href="{{ path('app_privacy') }}" class="text-slate-600 dark:text-slate-400 hover:text-orange-500 transition-colors text-sm font-body">Privacy Policy</a></li>
+                <li><a href="{{ path('app_contact') }}" class="text-slate-600 dark:text-slate-400 hover:text-orange-500 transition-colors text-sm font-body">Contact</a></li>
+            </ul>
+        </div>
+
+        {# Newsletter #}
+        <div class="col-span-2 md:col-span-4 lg:col-span-1">
+            <h4 class="text-lg font-bold mb-4 font-headline text-orange-700 dark:text-orange-500">Newsletter</h4>
+            <form action="{{ path('app_newsletter_subscribe') }}" method="POST" class="flex">
+                <input
+                    type="hidden"
+                    name="_token"
+                    value="{{ csrf_token('newsletter') }}"
+                />
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Your email"
+                    required
+                    class="bg-white border-none text-sm p-3 w-full rounded-l-md focus:ring-0"
+                />
+                <button type="submit" class="bg-primary text-white p-3 rounded-r-md hover:bg-primary-dim transition-all">
+                    <span class="material-symbols-outlined">send</span>
+                </button>
+            </form>
+            {% if app.flashes('newsletter_success') is not empty %}
+                <p class="text-green-600 text-xs mt-2">{{ app.flashes('newsletter_success')|first }}</p>
+            {% endif %}
+        </div>
+
+    </div>
+
+    {# Bottom bar #}
+    <div class="border-t border-slate-200/10 py-8 px-8 max-w-screen-2xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+        <span class="text-slate-600 dark:text-slate-400 text-sm font-body">
+            &copy; {{ "now"|date("Y") }} TriathShare. Precision in Motion.
+        </span>
+        <div class="flex gap-6">
+            <img src="{{ asset('images/payment/visa.svg') }}" alt="Visa" class="h-6 opacity-50 grayscale hover:grayscale-0 transition-all"/>
+            <img src="{{ asset('images/payment/mastercard.svg') }}" alt="Mastercard" class="h-6 opacity-50 grayscale hover:grayscale-0 transition-all"/>
+            <img src="{{ asset('images/payment/paypal.svg') }}" alt="PayPal" class="h-6 opacity-50 grayscale hover:grayscale-0 transition-all"/>
+        </div>
+    </div>
+</footer>

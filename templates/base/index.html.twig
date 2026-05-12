@@ -1,7 +1,155 @@
 {% extends 'base.html.twig' %}
-{% block title %}{{parent()}}Accueil{% endblock %}
+
+{% block title %}{{ parent() }} - Accueil{% endblock %}
+
 {% block body %}
-<h1 class="text-center text-primary mt-4 pt-4 display-1 fw-bold"> TRIATHSHARE</h1>
- <h3 class="text-center text-secondary mb-4 pb-4 display-3"> Nous vendons d'excellent produit </h3>
- <h2 class="text-center"> <i class="bi bi-cloud-arrow-up-fill text-primary" ></i><i class="bi bi-folder text-secondary"></i><i class="bi bi-cloud-arrow-down-fill text-warning"></i></h2>
+<section class="relative h-[750px] flex items-center overflow-hidden bg-slate-900">
+    
+    <div class="absolute inset-0 z-0">
+        <img alt="Triathlete" class="w-full h-full object-cover opacity-50" src="uploads/images/background.png"/>
+        <div class="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/40 to-transparent pointer-events-none"></div>
+    </div>
+
+    <div class="absolute inset-0 z-10">
+         {# vélo 
+        <div class="absolute group" style="top: 38%; left: 78%;">
+            <a href="{{path("app_mes_produits")}}" class="relative flex items-center justify-center w-10 h-10">
+                <span class="absolute h-8 w-8 rounded-full bg-primary/20 border border-primary/30"></span>
+                <span class="relative rounded-full h-3 w-3 bg-primary shadow-lg"></span>
+                
+                <div class="absolute left-12 invisible group-hover:visible opacity-0 group-hover:opacity-100 translate-x-2 group-hover:translate-x-0 transition-all duration-300 w-48">
+                    <div class="bg-white/95 backdrop-blur-md p-3 rounded-xl shadow-2xl border border-white/20">
+                        <p class="text-[10px] font-bold text-primary uppercase tracking-widest">Équipement</p>
+                        <p class="text-sm font-black text-slate-900">Console PS5 Pro</p>
+                        <div class="flex items-center gap-1 mt-1 text-primary">
+                            <span class="text-[10px] font-bold uppercase">Découvrir</span>
+                            <span class="material-symbols-outlined text-xs">arrow_forward</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {# montre
+        <div class="absolute group" style="top: 52%; left: 91%;">
+            <a href="{{path("app_mes_produits")}}" class="relative flex items-center justify-center w-10 h-10">
+                <span class="absolute h-8 w-8 rounded-full bg-primary/20 border border-primary/30"></span>
+                <span class="relative rounded-full h-3 w-3 bg-primary shadow-lg"></span>
+                
+                <div class="absolute right-12 invisible group-hover:visible opacity-0 group-hover:opacity-100 translate-x-2 group-hover:translate-x-0 transition-all duration-300 w-48">
+                    <div class="bg-white/95 backdrop-blur-md p-3 rounded-xl shadow-2xl border border-white/20">
+                        <p class="text-[10px] font-bold text-primary uppercase tracking-widest">Équipement</p>
+                        <p class="text-sm font-black text-slate-900">Console PS5 Pro</p>
+                        <div class="flex items-center gap-1 mt-1 text-primary">
+                            <span class="text-[10px] font-bold uppercase">Découvrir</span>
+                            <span class="material-symbols-outlined text-xs">arrow_forward</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {# lunettes
+        <div class="absolute group" style="top: 58%; left: 95%;">
+            <a href="{{path("app_mes_produits")}}" class="relative flex items-center justify-center w-10 h-10">
+                <span class="absolute h-8 w-8 rounded-full bg-primary/20 border border-primary/30"></span>
+                <span class="relative rounded-full h-3 w-3 bg-primary shadow-lg"></span>
+                
+                <div class="absolute right-12 invisible group-hover:visible opacity-0 group-hover:opacity-100 translate-x-2 group-hover:translate-x-0 transition-all duration-300 w-48">
+                    <div class="bg-white/95 backdrop-blur-md p-3 rounded-xl shadow-2xl border border-white/20">
+                        <p class="text-[10px] font-bold text-primary uppercase tracking-widest">Équipement</p>
+                        <p class="text-sm font-black text-slate-900">Console PS5 Pro</p>
+                        <div class="flex items-center gap-1 mt-1 text-primary">
+                            <span class="text-[10px] font-bold uppercase">Découvrir</span>
+                            <span class="material-symbols-outlined text-xs">arrow_forward</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {# chaussures
+        <div class="absolute group" style="top: 78%; left: 78%;">
+            <a href="{{path("app_mes_produits")}}" class="relative flex items-center justify-center w-10 h-10">
+                <span class="absolute h-8 w-8 rounded-full bg-primary/20 border border-primary/30"></span>
+                <span class="relative rounded-full h-3 w-3 bg-primary shadow-lg"></span>
+                
+                <div class="absolute left-12 invisible group-hover:visible opacity-0 group-hover:opacity-100 translate-x-2 group-hover:translate-x-0 transition-all duration-300 w-48">
+                    <div class="bg-white/95 backdrop-blur-md p-3 rounded-xl shadow-2xl border border-white/20">
+                        <p class="text-[10px] font-bold text-primary uppercase tracking-widest">Équipement</p>
+                        <p class="text-sm font-black text-slate-900">Console PS5 Pro</p>
+                        <div class="flex items-center gap-1 mt-1 text-primary">
+                            <span class="text-[10px] font-bold uppercase">Découvrir</span>
+                            <span class="material-symbols-outlined text-xs">arrow_forward</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>#}
+
+       
+
+    </div>
+
+    <div class="container mx-auto px-8 relative z-20 pointer-events-none">
+        <div class="max-w-3xl">
+            <div class="pointer-events-auto">
+                <span class="text-primary font-bold tracking-widest uppercase mb-4 block font-label">Précision en Mouvement</span>
+                <h1 class="font-headline text-white text-6xl md:text-8xl font-black leading-none tracking-tighter mb-8 italic uppercase">
+                    Repoussez <br/> vos <span class="text-primary">Limites</span>
+                </h1>
+                <p class="text-slate-300 text-lg md:text-xl max-w-xl mb-10 leading-relaxed">
+                    Le meilleur équipement curaté pour le triathlète moderne.
+                </p>
+                <a href="{{ path('app_mes_produits') }}" class="inline-flex items-center gap-3 bg-primary hover:bg-primary-dim text-white px-8 py-4 rounded-xl font-bold text-lg shadow-xl transition-all">
+                    Découvrir la collection
+                    <span class="material-symbols-outlined">trending_flat</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<section class="py-24 px-8 max-w-screen-2xl mx-auto">
+    <div class="mb-16">
+        <span class="text-primary font-bold">Catégories</span>
+        <h2 class="font-headline text-4xl font-extrabold text-on-surface mt-2">Conçu pour chaque étape</h2>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="group relative overflow-hidden rounded-xl h-80 shadow-lg">
+            <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://images.unsplash.com/photo-1530549387074-d5622d2c420a?q=80&w=600" alt="Swim"/>
+            <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors"></div>
+            <div class="absolute bottom-0 p-6">
+                <h3 class="text-2xl font-bold text-white font-headline">Natation</h3>
+                <p class="text-white/80 text-sm mb-4">Combinaisons et lunettes haute performance.</p>
+            </div>
+        </div>
+        
+        <div class="group relative overflow-hidden rounded-xl h-80 shadow-lg">
+            <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://images.unsplash.com/photo-1485965120184-e220f721d03e?q=80&w=600" alt="Bike"/>
+            <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors"></div>
+            <div class="absolute bottom-0 p-6">
+                <h3 class="text-2xl font-bold text-white font-headline">Cyclisme</h3>
+                <p class="text-white/80 text-sm mb-4">Aérodynamisme et ingénierie carbone.</p>
+            </div>
+        </div>
+
+        <div class="group relative overflow-hidden rounded-xl h-80 shadow-lg">
+            <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?q=80&w=600" alt="Run"/>
+            <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors"></div>
+            <div class="absolute bottom-0 p-6">
+                <h3 class="text-2xl font-bold text-white font-headline">Course</h3>
+                <p class="text-white/80 text-sm mb-4">Redéfinissez le retour d'énergie.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-12 bg-white text-center">
+    <div class="flex justify-center gap-8 text-5xl">
+        <i class="material-symbols-outlined text-primary scale-150">cloud_upload</i>
+        <i class="material-symbols-outlined text-slate-400 scale-150">folder</i>
+        <i class="material-symbols-outlined text-orange-400 scale-150">cloud_download</i>
+    </div>
+</section>
 {% endblock %}

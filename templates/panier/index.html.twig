@@ -1,0 +1,157 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ parent() }} - Mon Panier
+{% endblock %}
+
+{# CALCUL DES TOTAUX #}
+{% set total_articles = 0 %}
+{% set prix_total = 0 %}
+{% for ajouter in app.user.panier.ajouters %}
+    {% set total_articles = total_articles + ajouter.quantite %}
+    {% set prix_total = prix_total + (ajouter.produits.prix * ajouter.quantite) %}
+{% endfor %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        @keyframes heartPop { 0% { transform: scale(1); } 50% { transform: scale(1.4); } 100% { transform: scale(1); } }
+        .animate-heart { animation: heartPop 0.3s ease-out; color: #ef4444 !important; font-variation-settings: 'FILL' 1; }
+        .heart-btn { transition: all 0.2s ease; }
+        .heart-btn:hover { transform: scale(1.1); background-color: white !important; }
+    </style>
+{% endblock %}
+
+{% block body %}
+<main class="max-w-screen-2xl mx-auto px-6 py-12">
+    <div class="mb-12 border-b border-slate-200 pb-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div>
+            <h1 class="font-headline text-4xl md:text-5xl font-black text-on-surface tracking-tighter uppercase">
+                Mon Panier
+            </h1>
+            <p class="text-slate-500 mt-2 font-medium">Vous avez {{ total_articles }} article(s) dans votre sélection.</p>
+        </div>
+        {% if total_articles > 0 %}
+            <a href="{{ path('app_mes_produits') }}" class="text-sm font-bold text-slate-500 hover:text-primary transition-colors flex items-center gap-2">
+                <span class="material-symbols-outlined">arrow_back</span> Continuer mes achats
+            </a>
+        {% endif %}
+    </div>
+
+    {% if total_articles == 0 %}
+        <div class="bg-white rounded-[2rem] p-12 md:p-24 shadow-sm border border-slate-100 text-center flex flex-col items-center">
+            <div class="w-24 h-24 bg-slate-50 rounded-full flex items-center justify-center mb-6">
+                <span class="material-symbols-outlined text-5xl text-slate-300">shopping_cart</span>
+            </div>
+            <h2 class="font-headline text-2xl font-bold text-on-surface mb-2">Votre panier est vide</h2>
+            <p class="text-slate-500 max-w-md mx-auto mb-8 text-lg">Parcourez notre catalogue pour trouver l'équipement idéal pour votre prochaine course.</p>
+            <a href="{{ path('app_mes_produits') }}" class="bg-primary hover:bg-primary-dim text-white font-bold py-4 px-10 rounded-xl shadow-lg transition-all transform hover:-translate-y-1">
+                Découvrir le catalogue
+            </a>
+        </div>
+    {% else %}
+        <div class="flex flex-col lg:flex-row gap-12">
+            
+            <div class="flex-1 space-y-6">
+                {% for ajouter in app.user.panier.ajouters %}
+                    {% set image = 'uploads/images/' ~ ajouter.produits.image.nomServeur %}
+                    
+                    <article class="bg-white p-4 rounded-[1.5rem] border border-slate-100 shadow-sm flex flex-col sm:flex-row items-center gap-6 relative group transition-all hover:shadow-md">
+                        
+                        <div class="w-full sm:w-32 h-32 bg-slate-50 rounded-xl overflow-hidden flex-shrink-0 relative">
+                            <img alt="{{ ajouter.produits.nom }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="{{ asset(image) }}"/>
+                            
+                            {% if ajouter.produits.stock > 0 and ajouter.produits.stock <= 5 %}
+                                <div class="absolute bottom-0 w-full bg-red-100/90 text-red-700 text-[9px] font-black py-1 text-center uppercase tracking-widest backdrop-blur-sm">
+                                    Plus que {{ ajouter.produits.stock }}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="flex-1 text-center sm:text-left w-full">
+                            <p class="text-[10px] text-primary font-bold tracking-widest uppercase mb-1">{{ ajouter.produits.marque }}</p>
+                            <h3 class="font-headline font-bold text-lg leading-tight text-on-surface mb-2">
+                                {{ ajouter.produits.nom | capitalize }}
+                            </h3>
+                            <p class="font-headline font-black text-slate-400">{{ ajouter.produits.prix }} € <span class="text-xs font-normal">/ unité</span></p>
+                        </div>
+
+                        <div class="flex sm:flex-col items-center gap-4 sm:gap-2 justify-between w-full sm:w-auto mt-4 sm:mt-0 px-4 sm:px-0 border-t sm:border-t-0 border-slate-100 pt-4 sm:pt-0">
+                            
+                            <div class="flex items-center bg-slate-50 rounded-lg p-1 border border-slate-200">
+                                <a href="{{ path('app_panier_moins', {'id': ajouter.produits.id}) }}" class="w-8 h-8 flex items-center justify-center hover:bg-white rounded-md transition-all text-slate-600 font-bold hover:shadow-sm">
+                                    -
+                                </a>
+                                <span class="w-10 text-center font-bold text-sm text-slate-900">
+                                    {{ ajouter.quantite }}
+                                </span>
+                                <a href="{{ path('app_panier_plus', {'id': ajouter.produits.id}) }}" class="w-8 h-8 flex items-center justify-center hover:bg-white rounded-md transition-all text-slate-600 font-bold hover:shadow-sm">
+                                    +
+                                </a>
+                            </div>
+
+                            <div class="font-black text-lg text-primary text-right w-full">
+                                {{ ajouter.produits.prix * ajouter.quantite }} €
+                            </div>
+
+                            <a href="{{ path('app_panier_supprimer', {'id': ajouter.produits.id}) }}" class="absolute top-4 right-4 sm:static text-slate-300 hover:text-red-500 transition-colors p-2 sm:p-0" title="Retirer du panier">
+                                <span class="material-symbols-outlined text-xl">delete</span>
+                            </a>
+                        </div>
+                    </article>
+                {% endfor %}
+            </div>
+
+            <aside class="w-full lg:w-[380px] flex-shrink-0">
+                <div class="bg-slate-900 rounded-[2rem] p-8 shadow-xl text-white sticky top-32">
+                    <h2 class="font-headline font-bold text-2xl mb-6 border-b border-slate-700 pb-4">Résumé</h2>
+                    
+                    <div class="space-y-4 mb-8">
+                        <div class="flex justify-between text-slate-300">
+                            <span>Sous-total ({{ total_articles }} articles)</span>
+                            <span class="font-bold">{{ prix_total }} €</span>
+                        </div>
+                        <div class="flex justify-between text-slate-300">
+                            <span>Frais de livraison</span>
+                            <span class="text-green-400 font-bold text-xs bg-green-400/10 px-2 py-1 rounded uppercase tracking-widest">Offerts</span>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-slate-700 pt-6 mb-8 flex justify-between items-end">
+                        <span class="font-bold text-lg">Total TTC</span>
+                        <span class="font-headline font-black text-4xl text-primary">{{ prix_total }} €</span>
+                    </div>
+
+                    <a href="{{ path('app_commande') }}" class="w-full bg-primary hover:bg-orange-600 text-white font-bold py-5 px-6 rounded-xl shadow-lg transition-all flex items-center justify-center gap-3 uppercase tracking-widest text-sm no-underline">
+    Valider mon panier 
+    <span class="material-symbols-outlined">lock</span>
+</a>
+
+                    <p class="text-center text-[10px] text-slate-400 mt-4 tracking-wider uppercase">
+                        Paiement 100% sécurisé
+                    </p>
+                </div>
+            </aside>
+
+        </div>
+    {% endif %}
+</main>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script>
+    function toggleFavorite(btn) {
+        const icon = btn.querySelector('span');
+        if (icon.classList.contains('animate-heart')) {
+            icon.classList.remove('animate-heart');
+            btn.classList.remove('text-red-500');
+            btn.classList.add('text-slate-400');
+        } else {
+            icon.classList.add('animate-heart');
+            btn.classList.add('text-red-500');
+            btn.classList.remove('text-slate-400');
+        }
+    }
+</script>
+{% endblock %}

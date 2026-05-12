@@ -1,16 +1,82 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{parent()}}Produit{% endblock %}
+{% block title %}{{ parent() }} - Ajouter un Produit{% endblock %}
 
 {% block body %}
-	<div class="container-fluid">
-			<div class="row justify-content-center">
-			
-				<div class="col-10 text-primary">
-					<h1 class="text-center text-primary mt-4 pt-4 display-1 fw-bold">PRODUIT</h1>
-					{{form(form)}}
-				</div>
-			</div>
-		</div>
+<main class="max-w-screen-md mx-auto px-6 py-12">
+    
+    <div class="mb-10 text-center">
+        <span class="text-primary font-bold text-xs tracking-widest uppercase mb-1 block">Administration</span>
+        <h1 class="font-headline text-4xl font-black text-on-surface tracking-tighter uppercase">Nouveau Produit</h1>
+    </div>
 
+    <div class="bg-white rounded-[2rem] p-8 md:p-12 shadow-sm border border-slate-100 relative overflow-hidden">
+        
+        <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-primary to-orange-400"></div>
+
+        {{ form_start(form, {'attr': {'class': 'space-y-8'}}) }}
+        
+        <div>
+            <h2 class="text-lg font-headline font-bold text-slate-800 mb-6 border-b border-slate-100 pb-2 flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary">info</span> Informations Générales
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    {{ form_label(form.nom, 'Nom du produit', {'label_attr': {'class': 'block text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 ml-1'}}) }}
+                    {{ form_widget(form.nom, {'attr': {'class': 'w-full bg-slate-50 border-slate-200 rounded-xl focus:ring-primary focus:border-primary text-slate-700'}}) }}
+                </div>
+                <div>
+                    {{ form_label(form.marque, 'Marque', {'label_attr': {'class': 'block text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 ml-1'}}) }}
+                    {{ form_widget(form.marque, {'attr': {'class': 'w-full bg-slate-50 border-slate-200 rounded-xl focus:ring-primary focus:border-primary text-slate-700'}}) }}
+                </div>
+                <div class="md:col-span-2">
+                    {{ form_label(form.categorie, 'Catégorie', {'label_attr': {'class': 'block text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 ml-1'}}) }}
+                    {{ form_widget(form.categorie, {'attr': {'class': 'w-full bg-slate-50 border-slate-200 rounded-xl focus:ring-primary focus:border-primary text-slate-700'}}) }}
+                </div>
+                <div class="md:col-span-2">
+                    {{ form_label(form.description, 'Description détaillée', {'label_attr': {'class': 'block text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 ml-1'}}) }}
+                    {{ form_widget(form.description, {'attr': {'class': 'w-full bg-slate-50 border-slate-200 rounded-xl focus:ring-primary focus:border-primary text-slate-700', 'rows': '5'}}) }}
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <h2 class="text-lg font-headline font-bold text-slate-800 mb-6 border-b border-slate-100 pb-2 flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary">inventory_2</span> Inventaire & Prix
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    {{ form_label(form.prix, 'Prix unitaire (€)', {'label_attr': {'class': 'block text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 ml-1'}}) }}
+                    {{ form_widget(form.prix, {'attr': {'class': 'w-full bg-slate-50 border-slate-200 rounded-xl focus:ring-primary focus:border-primary text-slate-700'}}) }}
+                </div>
+                <div>
+                    {{ form_label(form.stock, 'Quantité en stock', {'label_attr': {'class': 'block text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 ml-1'}}) }}
+                    {{ form_widget(form.stock, {'attr': {'class': 'w-full bg-slate-50 border-slate-200 rounded-xl focus:ring-primary focus:border-primary text-slate-700'}}) }}
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <h2 class="text-lg font-headline font-bold text-slate-800 mb-6 border-b border-slate-100 pb-2 flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary">image</span> Média
+            </h2>
+            <div>
+                {{ form_label(form.image, 'Nom du fichier image (ex: velo-pro.jpg)', {'label_attr': {'class': 'block text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 ml-1'}}) }}
+                {{ form_widget(form.image, {'attr': {'class': 'w-full bg-slate-50 border-slate-200 rounded-xl focus:ring-primary focus:border-primary text-slate-700'}}) }}
+                <p class="text-xs text-slate-400 mt-2 ml-1">L'image doit être placée dans le dossier public/images/ de votre projet.</p>
+            </div>
+        </div>
+
+        <div class="pt-8 mt-8 border-t border-slate-100">
+            {{ form_widget(form.envoyer, {
+                'label': 'Publier le produit', 
+                'attr': {
+                    'class': 'w-full bg-slate-900 hover:bg-primary text-white font-bold py-4 px-8 rounded-xl shadow-lg shadow-slate-900/20 transition-all cursor-pointer uppercase tracking-widest text-sm'
+                }
+            }) }}
+        </div>
+
+        {{ form_end(form) }}
+    </div>
+</main>
 {% endblock %}

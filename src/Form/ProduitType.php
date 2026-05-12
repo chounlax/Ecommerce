@@ -11,19 +11,36 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\Fichier;
+use Doctrine\ORM\EntityRepository;
 
 class ProduitType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-		->add('nom', TextType::class, ['attr' => ['class'=> 'form-control'], 'label_attr' => ['class'=>'fw-bold']])
-		->add('categorie', TextType::class, ['attr' => ['class'=> 'form-control'], 'label_attr' => ['class'=>'fw-bold']])
-		->add('prix', NumberType::class, ['attr' => ['class'=> 'form-control'], 'label_attr' => ['class'=>'fw-bold']])
-		->add('stock', IntegerType::class, ['attr' => ['class'=> 'form-control', 'rows'=>'7', 'cols'=> '7'], 'label_attr' => ['class'=> 'fw-bold']])
-		->add('envoyer', SubmitType::class, ['attr' => ['class'=> 'btn bg-primary text-white m-4' ],'row_attr' => ['class' => 'text-center'],])
-	;
+		->add('nom', TextType::class)
+            ->add('marque', TextType::class)
+            ->add('categorie', TextType::class)
+            ->add('description', TextareaType::class)
+            ->add('prix', NumberType::class)
+            ->add('stock', IntegerType::class)
+            
+            ->add('image', EntityType::class, [
+                'attr' => ['class' => 'form-select'], 'label_attr' => ['class' => 'fw-bold'],
+                'class' => Fichier::class,
+                'choice_label' => function ($fichier) {
+                    return $fichier->getNomOriginal();
+                },
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->orderBy('u.nomOriginal', 'ASC');
+                },
+
+            ])
+            ->add('envoyer', SubmitType::class)
+        ;
 
     }
 

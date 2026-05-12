@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - Inscription{% endblock %}
+
+{% block body %}
+<main class="min-h-[70vh] flex flex-col justify-center py-12 px-6 sm:px-6 lg:px-8 bg-slate-50/50">
+    <div class="sm:mx-auto sm:w-full sm:max-w-md text-center mb-8">
+        <span class="text-primary font-bold text-xs tracking-widest uppercase mb-2 block">Rejoignez-nous</span>
+        <h1 class="font-headline text-4xl font-black text-on-surface tracking-tighter uppercase">Inscription</h1>
+    </div>
+
+    <div class="sm:mx-auto sm:w-full sm:max-w-md">
+        <div class="bg-white py-8 px-6 sm:px-10 rounded-[2rem] shadow-sm border border-slate-100 relative overflow-hidden">
+            
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-orange-400"></div>
+
+            {# Affichage des erreurs globales du formulaire s'il y en a #}
+            {% if not registrationForm.vars.valid %}
+                <div class="bg-red-50 text-red-500 text-sm p-4 rounded-xl mb-6">
+                    {{ form_errors(registrationForm) }}
+                </div>
+            {% endif %}
+
+            {{ form_start(registrationForm, {'attr': {'class': 'space-y-5'}}) }}
+
+                <div>
+                    {{ form_label(registrationForm.nom, 'Nom complet', {'label_attr': {'class': 'block text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 ml-1'}}) }}
+                    {{ form_widget(registrationForm.nom, {'attr': {'class': 'w-full bg-slate-50 border-slate-200 rounded-xl focus:ring-primary focus:border-primary text-slate-700 px-4 py-3'}}) }}
+                    <div class="text-red-500 text-xs mt-1">{{ form_errors(registrationForm.nom) }}</div>
+                </div>
+
+				<div>
+                    {{ form_label(registrationForm.prenom, 'Prénom complet', {'label_attr': {'class': 'block text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 ml-1'}}) }}
+                    {{ form_widget(registrationForm.prenom, {'attr': {'class': 'w-full bg-slate-50 border-slate-200 rounded-xl focus:ring-primary focus:border-primary text-slate-700 px-4 py-3'}}) }}
+                    <div class="text-red-500 text-xs mt-1">{{ form_errors(registrationForm.prenom) }}</div>
+                </div>
+
+                <div>
+                    {{ form_label(registrationForm.email, 'Adresse Email', {'label_attr': {'class': 'block text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 ml-1'}}) }}
+                    {{ form_widget(registrationForm.email, {'attr': {'class': 'w-full bg-slate-50 border-slate-200 rounded-xl focus:ring-primary focus:border-primary text-slate-700 px-4 py-3'}}) }}
+                    <div class="text-red-500 text-xs mt-1">{{ form_errors(registrationForm.email) }}</div>
+                </div>
+
+                <div>
+                    {{ form_label(registrationForm.plainPassword, 'Mot de passe', {'label_attr': {'class': 'block text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 ml-1'}}) }}
+                    {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'w-full bg-slate-50 border-slate-200 rounded-xl focus:ring-primary focus:border-primary text-slate-700 px-4 py-3'}}) }}
+                    <div class="text-red-500 text-xs mt-1">{{ form_errors(registrationForm.plainPassword) }}</div>
+                </div>
+
+                <div class="flex items-start mt-4 bg-slate-50 p-4 rounded-xl border border-slate-100">
+                    <div class="flex items-center h-5">
+                        {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'w-4 h-4 text-primary bg-white border-slate-300 rounded focus:ring-primary focus:ring-2'}}) }}
+                    </div>
+                    <div class="ml-3 text-sm">
+                        {{ form_label(registrationForm.agreeTerms, 'J\'accepte les conditions d\'utilisation', {'label_attr': {'class': 'font-medium text-slate-700'}}) }}
+                    </div>
+                </div>
+
+                <div class="pt-4">
+                    <button class="w-full bg-slate-900 hover:bg-primary text-white font-bold py-4 rounded-xl shadow-lg shadow-slate-900/20 transition-all uppercase tracking-widest text-sm flex justify-center items-center gap-2" type="submit">
+                        Créer mon compte
+                        <span class="material-symbols-outlined text-sm">person_add</span>
+                    </button>
+                </div>
+
+            {{ form_end(registrationForm) }}
+            
+            <p class="mt-6 text-center text-sm text-slate-500">
+                Déjà un compte ? <a href="{{ path('app_login') }}" class="font-bold text-primary hover:text-orange-600 transition-colors">Connectez-vous</a>
+            </p>
+        </div>
+    </div>
+</main>
+{% endblock %}

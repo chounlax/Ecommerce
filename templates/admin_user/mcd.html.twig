@@ -1,0 +1,119 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Structure complète de la BDD{% endblock %}
+
+{% block body %}
+<main class="max-w-screen-xl mx-auto px-6 py-12">
+    
+    {# En-tête #}
+    <div class="mb-12 border-b border-slate-200 pb-8">
+        <h1 class="font-headline text-4xl font-black text-slate-900 tracking-tighter uppercase">
+            Dictionnaire de données complet
+        </h1>
+        <p class="text-slate-500 mt-2 font-medium">Récapitulatif de toutes les tables de la base de données dbTriathSport.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        {# Table USER #}
+        <div class="bg-white rounded-[2rem] p-6 shadow-sm border border-slate-100 h-full">
+            <h3 class="font-headline text-lg font-bold text-slate-900 mb-4 flex items-center gap-2 border-b border-slate-100 pb-3">
+                <span class="material-symbols-outlined text-primary">person</span> user
+            </h3>
+            <div class="space-y-2">
+                {% for field in ['id', 'email', 'roles', 'password', 'nom', 'prenom', 'date_inscription', 'panier_id'] %}
+                    <div class="flex justify-between p-2 bg-slate-50 rounded-lg border border-slate-100">
+                        <span class="font-mono text-xs font-bold text-primary">{{ field }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        {# Table PRODUIT #}
+        <div class="bg-white rounded-[2rem] p-6 shadow-sm border border-slate-100 h-full">
+            <h3 class="font-headline text-lg font-bold text-slate-900 mb-4 flex items-center gap-2 border-b border-slate-100 pb-3">
+                <span class="material-symbols-outlined text-primary">inventory_2</span> produit
+            </h3>
+            <div class="space-y-2">
+                {% for field in ['id', 'nom', 'categorie', 'prix', 'stock', 'description', 'marque', 'image_id'] %}
+                    <div class="flex justify-between p-2 bg-slate-50 rounded-lg border border-slate-100">
+                        <span class="font-mono text-xs font-bold text-primary">{{ field }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        {# Table COMMANDE #}
+        <div class="bg-white rounded-[2rem] p-6 shadow-sm border border-slate-100 h-full">
+            <h3 class="font-headline text-lg font-bold text-slate-900 mb-4 flex items-center gap-2 border-b border-slate-100 pb-3">
+                <span class="material-symbols-outlined text-primary">receipt_long</span> commande
+            </h3>
+            <div class="space-y-2">
+                {% for field in ['id', 'produits', 'prixtotal', 'id_user_id', 'date_achat'] %}
+                    <div class="flex justify-between p-2 bg-slate-50 rounded-lg border border-slate-100">
+                        <span class="font-mono text-xs font-bold text-primary">{{ field }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        {# Table FICHIER #}
+        <div class="bg-white rounded-[2rem] p-6 shadow-sm border border-slate-100 h-full">
+            <h3 class="font-headline text-lg font-bold text-slate-900 mb-4 flex items-center gap-2 border-b border-slate-100 pb-3">
+                <span class="material-symbols-outlined text-primary">image</span> fichier
+            </h3>
+            <div class="space-y-2">
+                {% for field in ['id', 'nom_original', 'nom_serveur', 'date_envoi', 'extension', 'taille', 'user_id'] %}
+                    <div class="flex justify-between p-2 bg-slate-50 rounded-lg border border-slate-100">
+                        <span class="font-mono text-xs font-bold text-primary">{{ field }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        {# Table AJOUTER #}
+        <div class="bg-white rounded-[2rem] p-6 shadow-sm border border-slate-100 h-full">
+            <h3 class="font-headline text-lg font-bold text-slate-900 mb-4 flex items-center gap-2 border-b border-slate-100 pb-3">
+                <span class="material-symbols-outlined text-primary">add_shopping_cart</span> ajouter
+            </h3>
+            <div class="space-y-2">
+                {% for field in ['id', 'quantite', 'paniers_id', 'produits_id'] %}
+                    <div class="flex justify-between p-2 bg-slate-50 rounded-lg border border-slate-100">
+                        <span class="font-mono text-xs font-bold text-primary">{{ field }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        {# Table PANIER #}
+        <div class="bg-white rounded-[2rem] p-6 shadow-sm border border-slate-100 h-full">
+            <h3 class="font-headline text-lg font-bold text-slate-900 mb-4 flex items-center gap-2 border-b border-slate-100 pb-3">
+                <span class="material-symbols-outlined text-primary">shopping_basket</span> panier
+            </h3>
+            <div class="space-y-2">
+                {% for field in ['id'] %}
+                    <div class="flex justify-between p-2 bg-slate-50 rounded-lg border border-slate-100">
+                        <span class="font-mono text-xs font-bold text-primary">{{ field }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        {# Table USER_PRODUIT (Favoris / ManyToMany) #}
+        <div class="bg-white rounded-[2rem] p-6 shadow-sm border border-slate-100 h-full border-dashed border-primary/30">
+            <h3 class="font-headline text-lg font-bold text-slate-900 mb-4 flex items-center gap-2 border-b border-slate-100 pb-3">
+                <span class="material-symbols-outlined text-primary">join_inner</span> user_produit
+            </h3>
+            <p class="text-[10px] text-slate-400 uppercase font-black mb-3">Table de liaison</p>
+            <div class="space-y-2">
+                {% for field in ['user_id', 'produit_id'] %}
+                    <div class="flex justify-between p-2 bg-primary/5 rounded-lg border border-primary/10">
+                        <span class="font-mono text-xs font-bold text-primary">{{ field }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+</main>
+{% endblock %}
