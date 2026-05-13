@@ -136,7 +136,7 @@ final class ProduitController extends AbstractController
         return $this->redirectToRoute('app_mes_produits');
     }
 
-    #[Route('/private-page-produit/{id}', name: 'app_page_produit')]
+    #[Route('/page-produit/{id}', name: 'app_page_produit')]
     public function page(Request $request, Produit $produit, EntityManagerInterface $em): Response
     {
         if ($produit == null) {

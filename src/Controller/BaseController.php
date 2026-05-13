@@ -16,7 +16,7 @@ class BaseController extends AbstractController
         return $this->render('base/index.html.twig');
     }
 
-    #[Route('/mod-a-propos', name: 'app_apropos')]
+    #[Route('/a-propos', name: 'app_apropos')]
     public function apropos(): Response
     {
         return $this->render('base/apropos.html.twig');

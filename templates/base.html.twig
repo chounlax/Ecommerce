@@ -58,55 +58,58 @@ fontFamily: {
 
 					<div class="hidden lg:flex gap-6 items-center">
 						{% if is_granted('ROLE_MOD') or is_granted('ROLE_ADMIN') %}
-    {# Conteneur du Dropdown avec Alpine.js pour l'ouverture/fermeture #}
-    <div class="relative" x-data="{ open: false }">
-        {# Bouton déclencheur #}
-        <button @click="open = !open" @click.away="open = false" class="flex items-center gap-2 text-slate-700 font-bold hover:text-primary transition-colors uppercase tracking-widest text-xs outline-none">
-            Administration
-            <span class="material-symbols-outlined transition-transform duration-200" :class="open ? 'rotate-180' : ''">expand_more</span>
-        </button>
+							{# Conteneur du Dropdown avec Alpine.js pour l'ouverture/fermeture #}
+							<div
+								class="relative" x-data="{ open: false }">
+								{# Bouton déclencheur #}
+								<button @click="open = !open" @click.away="open = false" class="flex items-center gap-2 text-slate-700 font-bold hover:text-primary transition-colors uppercase tracking-widest text-xs outline-none">
+									Administration
+									<span class="material-symbols-outlined transition-transform duration-200" :class="open ? 'rotate-180' : ''">expand_more</span>
+								</button>
 
-        {# Liste des liens #}
-        <div x-show="open" 
-             x-transition:enter="transition ease-out duration-100"
-             x-transition:enter-start="opacity-0 scale-95"
-             x-transition:enter-end="opacity-100 scale-100"
-             class="absolute left-0 mt-3 w-56 bg-white rounded-2xl shadow-2xl border border-slate-100 py-3 z-50 origin-top-left">
-            
-            <div class="px-4 py-2 border-b border-slate-50 mb-2">
-                <p class="text-[10px] font-black uppercase tracking-widest text-slate-400">Gestion Boutique</p>
-            </div>
+								{# Liste des liens #}
+								<div x-show="open" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" class="absolute left-0 mt-3 w-56 bg-white rounded-2xl shadow-2xl border border-slate-100 py-3 z-50 origin-top-left">
 
-            <a class="flex items-center gap-3 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-slate-50 hover:text-primary transition-all" href="{{ path('app_produit') }}">
-                <span class="material-symbols-outlined text-base">add_box</span>
-                Produits
-            </a>
+									<div class="px-4 py-2 border-b border-slate-50 mb-2">
+										<p class="text-[10px] font-black uppercase tracking-widest text-slate-400">Gestion Boutique</p>
+									</div>
 
-            <a class="flex items-center gap-3 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-slate-50 hover:text-primary transition-all" href="{{ path('app_fichier') }}">
-                <span class="material-symbols-outlined text-base">upload_file</span>
-                Fichiers
-            </a>
+									<a class="flex items-center gap-3 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-slate-50 hover:text-primary transition-all" href="{{ path('app_produit') }}">
+										<span class="material-symbols-outlined text-base">add_box</span>
+										Produits
+									</a>
 
-            <div class="px-4 py-2 border-b border-slate-50 my-2">
-                <p class="text-[10px] font-black uppercase tracking-widest text-slate-400">Système</p>
-            </div>
+									<a class="flex items-center gap-3 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-slate-50 hover:text-primary transition-all" href="{{ path('app_fichier') }}">
+										<span class="material-symbols-outlined text-base">upload_file</span>
+										Fichiers
+									</a>
+									{% if is_granted('ROLE_ADMIN') %}
+									<div class="px-4 py-2 border-b border-slate-50 my-2">
+										<p class="text-[10px] font-black uppercase tracking-widest text-slate-400">Système</p>
+									</div>
 
-            <a class="flex items-center gap-3 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-slate-50 hover:text-primary transition-all" href="{{ path('app_admin_users') }}">
-                <span class="material-symbols-outlined text-base">group</span>
-                Utilisateurs
-            </a>
+									<a class="flex items-center gap-3 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-slate-50 hover:text-primary transition-all" href="{{ path('app_admin_users') }}">
+										<span class="material-symbols-outlined text-base">group</span>
+										Utilisateurs
+									</a>
 
-            <a class="flex items-center gap-3 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-slate-50 hover:text-primary transition-all" href="{{ path('app_admin_mcd') }}">
-                <span class="material-symbols-outlined text-base">schema</span>
-                Structure BDD
-            </a>
-        </div>
-    </div>
-{% endif %}
+									<a class="flex items-center gap-3 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-slate-50 hover:text-primary transition-all" href="{{ path('app_admin_mcd') }}">
+										<span class="material-symbols-outlined text-base">schema</span>
+										Structure BDD
+									</a>
+									{% endif %}
+								</div>
+							</div>
+						{% endif %}
 						<a class="text-slate-700 font-medium hover:text-orange-600 transition-colors" href="{{ path('app_mes_produits') }}">Produits</a>
-						<a class="text-slate-700 font-medium hover:text-orange-600 transition-colors" href="{{ path('app_apropos') }}">À Propos</a>
-						{{render(controller('App\\Controller\\BaseController::recherche'))}}
-						
+
+						<a class="text-slate-700 font-medium hover:text-orange-600 transition-colors whitespace-nowrap" href="{{ path('app_apropos') }}">À Propos</a>
+
+						<div class="flex-1 max-w-md ml-4">
+							{{ render(controller('App\\Controller\\BaseController::recherche')) }}
+						</div>
+
+
 					</div>
 				</div>
 
@@ -157,9 +160,56 @@ fontFamily: {
 		</div>
 
 		<div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-white border-t border-slate-100 shadow-lg lg:hidden flex-col">
-			<div class="flex flex-col px-6 py-4 space-y-4">
 
-				<a class="text-slate-700 font-medium hover:text-primary" href="{{ path('app_produit') }}">AdminAjoutProduits</a>
+			<div class="flex flex-col px-6 py-4 space-y-4">
+				<div class="flex-1 max-w-md ml-4">
+					{{ render(controller('App\\Controller\\BaseController::recherche')) }}
+				</div>
+				{% if is_granted('ROLE_MOD') or is_granted('ROLE_ADMIN') %}
+							{# Conteneur du Dropdown avec Alpine.js pour l'ouverture/fermeture #}
+							<div
+								class="relative" x-data="{ open: false }">
+								{# Bouton déclencheur #}
+								<button @click="open = !open" @click.away="open = false" class="flex items-center gap-2 text-slate-700 font-bold hover:text-primary transition-colors uppercase tracking-widest text-xs outline-none">
+									Administration
+									<span class="material-symbols-outlined transition-transform duration-200" :class="open ? 'rotate-180' : ''">expand_more</span>
+								</button>
+
+								{# Liste des liens #}
+								<div x-show="open" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" class="absolute left-0 mt-3 w-56 bg-white rounded-2xl shadow-2xl border border-slate-100 py-3 z-50 origin-top-left">
+
+									<div class="px-4 py-2 border-b border-slate-50 mb-2">
+										<p class="text-[10px] font-black uppercase tracking-widest text-slate-400">Gestion Boutique</p>
+									</div>
+
+									<a class="flex items-center gap-3 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-slate-50 hover:text-primary transition-all" href="{{ path('app_produit') }}">
+										<span class="material-symbols-outlined text-base">add_box</span>
+										Produits
+									</a>
+
+									<a class="flex items-center gap-3 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-slate-50 hover:text-primary transition-all" href="{{ path('app_fichier') }}">
+										<span class="material-symbols-outlined text-base">upload_file</span>
+										Fichiers
+									</a>
+									{% if is_granted('ROLE_ADMIN') %}
+
+									<div class="px-4 py-2 border-b border-slate-50 my-2">
+										<p class="text-[10px] font-black uppercase tracking-widest text-slate-400">Système</p>
+									</div>
+
+									<a class="flex items-center gap-3 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-slate-50 hover:text-primary transition-all" href="{{ path('app_admin_users') }}">
+										<span class="material-symbols-outlined text-base">group</span>
+										Utilisateurs
+									</a>
+
+									<a class="flex items-center gap-3 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-slate-50 hover:text-primary transition-all" href="{{ path('app_admin_mcd') }}">
+										<span class="material-symbols-outlined text-base">schema</span>
+										Structure BDD
+									</a>
+									{% endif %}
+								</div>
+							</div>
+						{% endif %}
 				<a class="text-slate-700 font-medium hover:text-primary" href="{{ path('app_mes_produits') }}">Produits</a>
 				<a class="text-slate-700 font-medium hover:text-primary" href="{{ path('app_apropos') }}">À Propos</a>
 
@@ -174,7 +224,7 @@ fontFamily: {
 							<span class="material-symbols-outlined p-2 bg-slate-50 rounded-full">favorite</span>
 							<span class="text-[10px] font-bold uppercase">Favoris</span>
 						</a>
-						<a href="{{ path('app_liste_favoris') }}" class="flex flex-col items-center gap-1 text-slate-600">
+						<a href="{{ path('app_panier') }}" class="flex flex-col items-center gap-1 text-slate-600">
 							<span class="material-symbols-outlined p-2 bg-slate-50 rounded-full">shopping_cart</span>
 							<span class="text-[10px] font-bold uppercase">Panier</span>
 						</a>
@@ -197,30 +247,97 @@ fontFamily: {
 		{{ message }}
 	</div>
 </div>{% endfor %}<main>
-{% block body %}{% endblock %}</main><footer class="bg-slate-900 text-white mt-24">
-<div class="max-w-screen-2xl mx-auto px-8 py-16 grid grid-cols-1 md:grid-cols-3 gap-12">
-	<div>
-		<div class="text-xl font-black italic mb-4 font-headline uppercase">TriathShare</div>
-		<p class="text-slate-400 text-sm">Équipez votre passion pour le triathlon avec le meilleur matériel professionnel.</p>
+{% block body %}{% endblock %}</main><footer class="bg-slate-900 text-white mt-24 border-t-4 border-primary">
+<div class="max-w-screen-2xl mx-auto px-8 py-20">
+	<div
+		class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+
+		{# Colonne 1 : Identité #}
+		<div class="md:col-span-1">
+			<div class="text-3xl font-black italic mb-6 font-headline uppercase tracking-tighter text-white">
+				Triath<span class="text-primary italic">Sport</span>
+			</div>
+			<p class="text-slate-400 text-sm leading-relaxed max-w-xs">
+				L'équipement d'élite pour la natation, le cyclisme et la course à pied. Repoussez vos limites avec TriathSport.
+			</p>
+			<div
+				class="flex gap-4 mt-6">
+				{# Petits cercles réseaux sociaux #}
+				<div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-primary hover:text-white transition-colors cursor-pointer">
+					<span class="material-symbols-outlined text-sm">share</span>
+				</div>
+				<div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-primary hover:text-white transition-colors cursor-pointer">
+					<span class="material-symbols-outlined text-sm">play_circle</span>
+				</div>
+			</div>
+		</div>
+
+		{# Colonne 2 : Navigation #}
+		<div>
+			<h4 class="text-xs font-black mb-6 text-slate-500 uppercase tracking-[0.2em]">Navigation</h4>
+			<ul class="space-y-4 text-sm font-bold">
+				<li>
+					<a href="{{ path('app_accueil') }}" class="text-slate-400 hover:text-primary transition-colors flex items-center gap-2">
+						<span class="w-1 h-1 bg-primary rounded-full"></span>
+						Accueil
+					</a>
+				</li>
+				<li>
+					<a href="{{ path('app_mes_produits') }}" class="text-slate-400 hover:text-primary transition-colors flex items-center gap-2">
+						<span class="w-1 h-1 bg-primary rounded-full"></span>
+						Boutique
+					</a>
+				</li>
+				<li>
+					<a href="{{ path('app_apropos') }}" class="text-slate-400 hover:text-primary transition-colors flex items-center gap-2">
+						<span class="w-1 h-1 bg-primary rounded-full"></span>
+						À propos
+					</a>
+				</li>
+			</ul>
+		</div>
+
+		{# Colonne 3 : Aide & Contact #}
+		<div class="md:col-span-2">
+			<h4 class="text-xs font-black mb-6 text-slate-500 uppercase tracking-[0.2em]">Besoin d'aide ?</h4>
+			<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+				<ul class="space-y-4">
+					<li class="flex items-start gap-3 group">
+						<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">support_agent</span>
+						<div>
+							<p class="text-[10px] uppercase font-black text-slate-500 tracking-widest">Téléphone</p>
+							<p class="text-sm font-bold text-slate-300">01 23 45 67 89</p>
+						</div>
+					</li>
+					<li class="flex items-start gap-3 group">
+						<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">mail</span>
+						<div>
+							<p class="text-[10px] uppercase font-black text-slate-500 tracking-widest">Email</p>
+							<p class="text-sm font-bold text-slate-300">contact@triathsport.fr</p>
+						</div>
+					</li>
+				</ul>
+				<ul class="space-y-4">
+					<li class="flex items-start gap-3 group">
+						<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">schedule</span>
+						<div>
+							<p class="text-[10px] uppercase font-black text-slate-500 tracking-widest">Horaires</p>
+							<p class="text-sm font-bold text-slate-300">Lun-Ven : 9h - 18h</p>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
 	</div>
-	<div>
-		<h4 class="text-lg font-bold mb-4 text-orange-500">Navigation</h4>
-		<ul class="space-y-2 text-sm text-slate-400">
-			<li>
-				<a href="{{ path('app_accueil') }}" class="hover:text-white">Accueil</a>
-			</li>
-			<li>
-				<a href="{{ path('app_mes_produits') }}" class="hover:text-white">Boutique</a>
-			</li>
-		</ul>
-	</div>
-	<div>
-		<h4 class="text-lg font-bold mb-4 text-orange-500">Newsletter</h4>
-		<div class="flex">
-			<input class="bg-slate-800 border-none text-sm p-3 w-full rounded-l-md focus:ring-0" placeholder="Votre email" type="email"/>
-			<button class="bg-primary p-3 rounded-r-md hover:bg-primary-dim">
-				<span class="material-symbols-outlined">send</span>
-			</button>
+
+	{# Ligne de copyright finale #}
+	<div class="pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-black uppercase tracking-[0.3em] text-slate-600">
+		<p>&copy;
+			{{ "now"|date("Y") }}
+			TriathSport - Conçu pour la performance</p>
+		<div class="flex gap-6">
+			<a href="#" class="hover:text-primary transition-colors">Mentions Légales</a>
+			<a href="#" class="hover:text-primary transition-colors">CGV</a>
 		</div>
 	</div>
 </div></footer>{% block javascripts %}

@@ -179,11 +179,13 @@
 								</p>
 
 								{# ACTIONS ADMIN/MOD (PLUS DISCRETES) #}
-								{% if is_granted('IS_AUTHENTICATED_FULLY') and "ROLE_MOD" or "ROLE_ADMIN" in app.user.roles %}
+								{% if is_granted('IS_AUTHENTICATED_FULLY')  %}
+									{% if "ROLE_MOD" or "ROLE_ADMIN" in app.user.roles %}
 									<div class="pt-3 flex gap-4">
 										<a href="{{ path('app_modifier_produit', {id: produit.id}) }}" class="text-[10px] font-bold text-slate-400 hover:text-primary uppercase tracking-widest transition-colors">Modifier</a>
 										<a href="{{ path('app_supprimer_produit', {id: produit.id}) }}" class="text-[10px] font-bold text-slate-400 hover:text-red-500 uppercase tracking-widest transition-colors">Supprimer</a>
 									</div>
+									{% endif %}
 								{% endif %}
 							</div>
 						</article>

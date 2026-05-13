@@ -13,10 +13,7 @@
 
     <div class="lg:col-span-5 p-8 lg:p-16 lg:sticky lg:top-20 lg:h-screen overflow-y-auto bg-white">
         
-        <div class="flex items-center gap-2 text-yellow-500 mb-4">
-            <span class="material-symbols-outlined">star</span> 4.8 
-            <span class="text-secondary text-sm font-normal">(20 avis)</span>
-        </div>
+        
 
         <h1 class="font-headline text-4xl font-black italic mb-2 uppercase">{{ produit.nom }}</h1>
         <p class="text-secondary mb-8">{{ produit.description }}</p>
@@ -27,9 +24,11 @@
             <div class="text-5xl font-black italic mb-2">{{ produit.prix|number_format(2, ',', ' ') }} €</div>
             <p class="text-sm text-secondary mb-6">Ou 235,14 €/mois avec financement</p>
             
-            <button class="w-full kinetic-gradient text-white py-5 rounded-xl font-headline text-xl shadow-lg hover:scale-[1.02] transition-transform">
-                AJOUTER AU PANIER
-            </button>
+            <a href="{{ path('app_panier_add', {'id': produit.id}) }}" 
+   class="w-full kinetic-gradient text-white py-5 rounded-xl font-headline text-xl shadow-lg hover:scale-[1.02] transition-transform flex justify-center items-center gap-3 decoration-none">
+    <span class="material-symbols-outlined">shopping_cart</span>
+    AJOUTER AU PANIER
+</a>
         </div>
         
     </div>
